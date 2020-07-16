@@ -15,6 +15,16 @@ def palindromePermutation(string):
     return count <= 1
 
 
+def palindromePermutationSet(string):
+    seenChars = set()
+    for char in string.lower().replace(' ', ''):
+        if char not in seenChars:
+            seenChars.add(char)
+        else:
+            seenChars.remove(char)
+    return len(seenChars) <= 1
+
+
 class Test(unittest.TestCase):
     '''Test Cases'''
     data = [
@@ -30,6 +40,8 @@ class Test(unittest.TestCase):
     def test_palindromePermutation(self):
         for [test_string, expected] in self.data:
             actual = palindromePermutation(test_string)
+            self.assertEqual(actual, expected)
+            actual = palindromePermutationSet(test_string)
             self.assertEqual(actual, expected)
 
 
